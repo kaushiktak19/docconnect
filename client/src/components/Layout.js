@@ -73,7 +73,7 @@ function Layout({ children }) {
                                 <Badge count={user && user.notification.length} onClick={() => {navigate("/notification")}}>
                                     <Avatar shape='sqaure' size="small"/>
                                 </Badge>
-                                <Link to="/profile">{user?.name}</Link>
+                                <Link to={`/doctor/profile/${user?._id}`}>{user?.name}</Link>
                             </div>
                         </div>
                         <div className='body'>{children}</div>

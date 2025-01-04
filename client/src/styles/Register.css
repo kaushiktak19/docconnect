@@ -1,13 +1,36 @@
-.form-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    
-}
+.login-page {
+    font-family: "Arial", sans-serif;
+  }
 
-.register-form{
-    border: 1px solid black;
-    padding: 30px;
-    /* width: 35%; */
-}
+.register-page {
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Left Section */
+  .left-section {
+    color: #333333; /* Dark gray for text */
+    background-color: #e0f7fa; /* Light teal */
+  }
+  
+  .left-section h1 span {
+    color: #009688; /* Teal accent for branding */
+  }
+  
+  .left-section ul li {
+    line-height: 1.5;
+  }
+  
+  /* Right Section */
+  .right-section {
+    background-color: #f8f9fa; /* Soft gray-white */
+  }
+  
+  .login-form-container {
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    transition: background-color 0.3s ease-in-out;
+  }
+  
