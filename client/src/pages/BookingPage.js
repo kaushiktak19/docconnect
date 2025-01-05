@@ -7,6 +7,8 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 const BookingPage = () => {
   const { user } = useSelector((state) => state.user);
   const params = useParams();
@@ -19,7 +21,7 @@ const BookingPage = () => {
   const getUserData = async () => {
     try {
       const res = await axios.post(
-        "/api/v1/doctor/getDoctorById",
+        `${API_BASE_URL}/api/v1/doctor/getDoctorById`,
         { doctorId: params.doctorId },
         {
           headers: {
@@ -40,7 +42,7 @@ const BookingPage = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "/api/v1/user/booking-availability",
+        `${API_BASE_URL}/api/v1/user/booking-availability`,
         { doctorId: params.doctorId, date, time },
         {
           headers: {
@@ -71,7 +73,7 @@ const BookingPage = () => {
       }
       dispatch(showLoading());
       const res = await axios.post(
-        "/api/v1/user/book-appointment",
+        `${API_BASE_URL}/api/v1/user/book-appointment`,
         {
           doctorId: params.doctorId,
           userId: user._id,

@@ -3,12 +3,14 @@ import Layout from '../../components/Layout'
 import axios from "axios"
 import { Table, message } from 'antd'
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 function Doctors() {
     const [doctors, setDoctors] = useState([])
 
     const getDoctors = async () => {
         try {
-            const res = await axios.get("/api/v1/admin/getAllDoctors", {
+            const res = await axios.get(`${API_BASE_URL}/api/v1/admin/getAllDoctors`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -25,7 +27,7 @@ function Doctors() {
     //handle account
     const handleAccountStatus = async (record, status) => {
         try {
-            const res = await axios.post("/api/v1/admin/changeAccountStatus", 
+            const res = await axios.post(`${API_BASE_URL}/api/v1/admin/changeAccountStatus`, 
                 {doctorId: record._id, userId: record.userId, status: status},
             {
                 headers: {

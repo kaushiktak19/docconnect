@@ -3,13 +3,15 @@ import Layout from '../../components/Layout'
 import axios from "axios"
 import { Table } from 'antd'
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 function Users() {
 
     const [users, setUsers] = useState([])
 
     const getUsers = async () => {
         try {
-            const res = await axios.get("/api/v1/admin/getAllUsers", {
+            const res = await axios.get(`${API_BASE_URL}/api/v1/admin/getAllUsers`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }

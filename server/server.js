@@ -20,10 +20,10 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use(cors({
-  origin: "http://localhost:3000", 
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));  // Enable CORS if needed
+    origin: process.env.REACT_APP_FRONTEND_URL || 'http://localhost:3000',  // Backend dynamically reads the frontend URL from env
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // routes
 app.use("/api/v1/user", require("./routes/userRoutes"));

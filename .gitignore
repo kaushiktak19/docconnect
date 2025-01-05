@@ -16,6 +16,8 @@ yarn-error.log*
 .env.development
 .env.test
 .env.production
+client/.env
+client/.env.production
 
 # Production build
 /dist

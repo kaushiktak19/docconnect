@@ -6,6 +6,8 @@ import {useSelector, useDispatch} from "react-redux"
 import { hideLoading, showLoading } from '../redux/features/alertSlice'
 import { setUser } from "../redux/features/userslice"
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 function ProtectedRoutes({children}) {
 
     const dispatch = useDispatch()
@@ -15,7 +17,7 @@ function ProtectedRoutes({children}) {
     const getUser = async() => {
         try{
             dispatch(showLoading())
-            const res = await axios.post("api/v1/user/getUserData",
+            const res = await axios.post(`${API_BASE_URL}/api/v1/user/getUserData`,
             { token : localStorage.getItem("token")},
             {
                 headers : {

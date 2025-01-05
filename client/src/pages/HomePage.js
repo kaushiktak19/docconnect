@@ -37,13 +37,16 @@ import axios from "axios";
 import Layout from "./../components/Layout";
 import { Row } from "antd";
 import DoctorList from "../components/DoctorList";
+
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
   // login user data
   const getUserData = async () => {
     try {
       const res = await axios.get(
-        "/api/v1/user/getAllDoctors",
+        `${API_BASE_URL}/api/v1/user/getAllDoctors`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -6,12 +6,14 @@ import axios from "axios";
 import moment from "moment";
 import { message, Table } from "antd";
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 const DoctorAppointments = () => {
   const [appointments, setAppointments] = useState([]);
 
   const getAppointments = async () => {
     try {
-      const res = await axios.get("/api/v1/doctor//doctor-appointments", {
+      const res = await axios.get(`${API_BASE_URL}/api/v1/doctor/doctor-appointments`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -31,7 +33,7 @@ const DoctorAppointments = () => {
   const handleStatus = async (record, status) => {
     try {
       const res = await axios.post(
-        "/api/v1/doctor/update-status",
+        `${API_BASE_URL}/api/v1/doctor/update-status`,
         { appointmentsId: record._id, status },
         {
           headers: {

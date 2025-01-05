@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../redux/features/alertSlice";
 import "../styles/Register.css";
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -14,7 +16,7 @@ const Register = () => {
   const onFinishHandler = async (values) => {
     try {
       dispatch(showLoading());
-      const res = await axios.post("./api/v1/user/register", values);
+      const res = await axios.post(`${API_BASE_URL}/api/v1/user/register`, values);
       dispatch(hideLoading());
       if (res.data.success) {
         message.success("Registered Successfully");

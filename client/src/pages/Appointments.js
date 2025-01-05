@@ -4,12 +4,14 @@ import Layout from "./../components/Layout";
 import moment from "moment";
 import { Table } from "antd";
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
 
   const getAppointments = async () => {
     try {
-      const res = await axios.get("/api/v1/user/user-appointments", {
+      const res = await axios.get(`${API_BASE_URL}/api/v1/user/user-appointments`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

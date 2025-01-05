@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../redux/features/alertSlice";
 import moment from "moment";
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
   const [doctor, setDoctor] = useState(null);
@@ -19,7 +21,7 @@ const Profile = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "/api/v1/doctor/updateProfile",
+        `${API_BASE_URL}/api/v1/doctor/updateProfile`,
         {
           ...values,
           userId: user._id,
@@ -53,7 +55,7 @@ const Profile = () => {
   const getDoctorInfo = async () => {
     try {
       const res = await axios.post(
-        "/api/v1/doctor/getDoctorInfo",
+        `${API_BASE_URL}/api/v1/doctor/getDoctorInfo`,
         { userId: params.id },
         {
           headers: {
