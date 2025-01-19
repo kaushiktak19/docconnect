@@ -17,7 +17,7 @@ DocConnect is a web application designed to help connect patients with doctors, 
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
-- **Hosting**: AWS S3 for the frontend, AWS EC2 for backend, CloudFront for CDN
+- **Hosting**: AWS S3 for the frontend, AWS EC2 for backend, CloudFront for CDN (frontend)
 - **CI/CD**: GitHub Actions
 - **Additional Libraries**: Axios, pm2.
 
