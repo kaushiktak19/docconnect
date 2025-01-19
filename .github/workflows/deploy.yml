@@ -30,7 +30,6 @@ jobs:
           npm install  # Install dependencies (make sure your frontend is using npm or yarn)
           npm run build  # Build the frontend (adjust according to your framework)
           aws s3 sync ./build s3://${{ secrets.S3_BUCKET }} --delete --acl public-read # Sync to your S3 bucket
-          aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths "/*"
 
       # Step 4: SSH into EC2 instance to deploy backend
       - name: SSH into EC2 and deploy backend
