@@ -33,7 +33,7 @@ jobs:
 
       # Step 4: SSH into EC2 instance to deploy backend
       - name: SSH into EC2 and deploy backend
-        uses: appleboy/ssh-action@v0.1.0
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}  # EC2 public IP or domain
           username: ubuntu  # Default username for EC2
