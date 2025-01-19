@@ -2,9 +2,7 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link,
-  useParams
+  Route
 } from "react-router-dom";
 import HomePage from './pages/HomePage'
 import Login from './pages/Login'
