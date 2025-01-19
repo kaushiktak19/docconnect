@@ -31,7 +31,8 @@ jobs:
           npm run build  # Build the frontend (adjust according to your framework)
           aws s3 rm s3://${{ secrets.S3_BUCKET }} --recursive  # Delete all files in the S3 bucket
           aws s3 sync ./build s3://${{ secrets.S3_BUCKET }}  # Sync the build directory to the S3 bucket
-          
+          aws cloudfront create-invalidation --distribution-id E2L2IDTIF4JGCQ --paths "/*"
+
       # Step 4: SSH into EC2 instance to deploy backend
       - name: SSH into EC2 and deploy backend
         uses: appleboy/ssh-action@master
