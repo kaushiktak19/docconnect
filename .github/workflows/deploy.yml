@@ -1,0 +1,45 @@
+name: Deploy to EC2 and S3
+
+# Trigger the workflow on push to the main branch
+on:
+  push:
+    branches:
+      - main  # Change this to the branch you want to deploy from (usually 'main' or 'master')
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # GitHub Actions will run this workflow on an Ubuntu runner
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up AWS credentials to interact with AWS services
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Replace with your AWS region
+
+      # Step 3: Build and deploy frontend (React, Vue, Angular, etc.) to S3
+      - name: Build and deploy frontend to S3
+        run: |
+          cd client  # Navigate to your frontend directory
+          npm install  # Install dependencies (make sure your frontend is using npm or yarn)
+          npm run build  # Build the frontend (adjust according to your framework)
+          aws s3 sync ./build s3://${{ secrets.S3_BUCKET }} --delete  # Sync to your S3 bucket
+
+      # Step 4: SSH into EC2 instance to deploy backend
+      - name: SSH into EC2 and deploy backend
+        uses: appleboy/ssh-action@v0.1.0
+        with:
+          host: ${{ secrets.EC2_HOST }}  # EC2 public IP or domain
+          username: ubuntu  # Default username for EC2
+          key: ${{ secrets.EC2_SSH_KEY }}  # SSH private key to access EC2
+          script: |
+            cd server # Navigate to your backend directory on EC2
+            git pull origin main  # Pull latest changes from the repository
+            npm install  # Install any new dependencies for the backend
+            pm2 restart server  # Restart your Node.js server with PM2 (adjust as necessary)
