@@ -27,9 +27,12 @@ jobs:
       - name: Build and deploy frontend to S3
         run: |
           cd client  # Navigate to your frontend directory
-          npm install  # Install dependencies (make sure your frontend is using npm or yarn)
-          npm run build  # Build the frontend (adjust according to your framework)
-          aws s3 sync ./build s3://${{ secrets.S3_BUCKET }} --exact-timestamps  # Sync the build directory to the S3 bucket
+          npm install  # Install dependencies
+          npm run build  # Build the frontend
+          aws s3 sync ./build s3://${{ secrets.S3_BUCKET }} --acl public-read --cache-control "max-age=31536000, public"  # Sync the build to S3 with caching headers
+          # Invalidate CloudFront cache to ensure it serves the latest files
+          aws cloudfront create-invalidation --distribution-id E2L2IDTIF4JGCQ --paths "/*"
+
 
       # Step 4: SSH into EC2 instance to deploy backend
       - name: SSH into EC2 and deploy backend
